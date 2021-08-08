@@ -14,7 +14,11 @@ require 'rails_helper'
 
 #feature = describe
 RSpec.describe 'creating articles' do
-  # scenatio = describe
+  before do
+    @john = User.create(email: "john@example.com", password: "password")
+    #this method is provided by warden - need to include Warden in rails-helper
+    login_as(@john)
+  end
   scenario 'user creates a new article' do
     visit '/'
     click_link 'New Article'
@@ -22,7 +26,9 @@ RSpec.describe 'creating articles' do
     fill_in "Body", with: "Lorem Ipsum"
     click_button "Create Article"
   
+    expect(Article.last.user).to eq(@john)
     expect(page).to have_content("Article has been created.")
+    expect(page).to have_content("Created by: #{@john.email}")
     expect(page.current_path).to eq(articles_path)
   end
 
