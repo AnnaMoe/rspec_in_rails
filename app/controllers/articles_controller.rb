@@ -1,6 +1,6 @@
 class ArticlesController < ApplicationController
   #user must be logged in
-  #before_action :authentiate_user!, except: [:index, :show]
+  before_action :authenticate_user!, except: [:index, :show]
   before_action :set_article, only: [:show, :edit, :update, :destroy]
 
   def index
@@ -28,6 +28,7 @@ class ArticlesController < ApplicationController
  end
 
  def edit
+    #@article.user = current_user
  end
 
  def update
