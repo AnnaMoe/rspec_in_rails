@@ -2,7 +2,10 @@ require 'rails_helper'
 
 RSpec.describe 'deleting an article' do
   before do
-    @article = Article.create(title: "First article", body: "Lorem ipsolum") 
+    @john = User.create(email: "john@example.com", password: "password")
+    #this method is provided by warden - need to include Warden in rails-helper
+    login_as(@john)
+    @article = Article.create(title: "First article", body: "Lorem ipsolum", user: @john) 
   end
 
   scenario 'user deletes an article' do

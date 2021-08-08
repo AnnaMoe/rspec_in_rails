@@ -17,6 +17,7 @@ class ArticlesController < ApplicationController
 
  def create
   @article = Article.new(article_params)
+  # must give article a user:
   @article.user = current_user
   if @article.save
     flash[:success] = "Article has been created."
@@ -28,7 +29,6 @@ class ArticlesController < ApplicationController
  end
 
  def edit
-    #@article.user = current_user
  end
 
  def update
