@@ -4,11 +4,11 @@ RSpec.describe "Adding reviews to Articles" do
   before do
     @john = User.create(email: "john@example.com", password: "password")
     @fred = User.create(email: "fred@example.com", password: "password")
-      #this method is provided by warden - need to include Warden in rails-helper
     @article = Article.create(title: "First article", body: "Lorem ipsolum", user: @john)  
   end
 
   scenario "a user adds a comment to an article" do
+    #this method is provided by warden - need to include Warden in rails-helper
     login_as(@fred)
     visit '/'
     click_link @article.title

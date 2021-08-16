@@ -42,7 +42,8 @@ class ArticlesController < ApplicationController
     flash[:danger] = "You can only edit your own article."
     redirect_to root_path 
   else
-    if @article.update(article_params) 
+    @article.update(article_params) 
+    if @article.save
       flash[:success] = "Article has been updated."
       redirect_to @article 
     else
