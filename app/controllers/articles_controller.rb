@@ -8,7 +8,6 @@ class ArticlesController < ApplicationController
   end
 
   def show
-    @article = Article.find(params[:id])
     @comment = @article.comments.build
     @comments = @article.comments
   end
@@ -42,8 +41,7 @@ class ArticlesController < ApplicationController
     flash[:danger] = "You can only edit your own article."
     redirect_to root_path 
   else
-    @article.update(article_params) 
-    if @article.save
+    if @article.update(article_params) 
       flash[:success] = "Article has been updated."
       redirect_to @article 
     else

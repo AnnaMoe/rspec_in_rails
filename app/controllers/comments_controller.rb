@@ -7,8 +7,11 @@ class CommentsController < ApplicationController
       redirect_to new_user_session_path
     else
       @comment = @article.comments.build(comment_params)
+      #@comment = @comment.order("created_at ASC")
       @comment.user = current_user
       if @comment.save
+        ActionCable.server.broadcast "comments",
+        render(partial: 'comments/comment', object: @comment ) 
         flash[:notice] = "Comment has been created."
         redirect_to article_path(@article)
       else

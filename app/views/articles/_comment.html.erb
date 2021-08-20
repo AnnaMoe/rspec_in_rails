@@ -1,4 +1,7 @@
-<%= form_for [@article, @comment ], :html => {class: "form-horizontal", role: "form"} do |f| %>
+
+<%# remote: true specifies that we use AJAX to send the form data to the server %>
+<%= form_for [@article, @comment ], remote: true, 
+    :html => {class: "form-horizontal", role: "form"} do |f| %>
       <% if @comment.errors.any? %>
         <div class="panel panel-danger col-md-offset-1">
           <div class="panel-heading">
